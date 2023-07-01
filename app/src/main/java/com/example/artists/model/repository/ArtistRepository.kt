@@ -7,7 +7,7 @@ class ArtistRepository {
 
     private val api = ArtistService()
 
-    suspend fun getArtistData(): TopArtistsResponse? {
+    suspend fun getArtistData(): TopArtistsResponse {
         return api.getArtistData()
     }
 

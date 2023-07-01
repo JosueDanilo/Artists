@@ -19,7 +19,7 @@ object RetrofitHelper {
 
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://ws.audioscrobbler.com/2.0/")
+            .baseUrl(Utils.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

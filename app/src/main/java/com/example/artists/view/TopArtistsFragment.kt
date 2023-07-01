@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.artists.R
 import com.example.artists.databinding.FragmentTopArtistsBinding
 import com.example.artists.model.dataclass.artist.ArtistData
@@ -38,7 +41,7 @@ class TopArtistsFragment : Fragment(R.layout.fragment_top_artists) {
 
         artistsViewModel.artistsDataModel.observe(viewLifecycleOwner) {
             listArtists = it.artist as MutableList<ArtistData>
-            binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+            binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
             binding.recycler.adapter = AdapterArtists(listArtists)
         }
 
