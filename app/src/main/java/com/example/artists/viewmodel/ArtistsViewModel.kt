@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.artists.model.dataclass.TopArtistsData
+import com.example.artists.model.dataclass.artist.ArtistData
 import com.example.artists.model.repository.ArtistRepository
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,7 @@ class ArtistsViewModel : ViewModel() {
         viewModelScope.launch {
             val result = artistsRepository.getArtistData()
             if (result != null)
-                _artistModel.postValue(result!!)
+                _artistModel.postValue(result.topartists)
         }
     }
 

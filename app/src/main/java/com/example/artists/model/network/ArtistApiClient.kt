@@ -1,12 +1,17 @@
 package com.example.artists.model.network
 
-import com.example.artists.model.dataclass.TopArtistsData
-import retrofit2.Response
+import com.example.artists.model.dataclass.TopArtistsResponse
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ArtistApiClient {
 
-    @GET("?method=geo.gettopartists&country=colombia&api_key=cf2894b9c73a323e24f5c6a9aab1eb85&format=json")
-    suspend fun getArtistData(): Response<TopArtistsData>
+    @GET("/2.0/")
+    suspend fun getTopArtists(
+        @Query("method") method: String,
+        @Query("country") country: String,
+        @Query("api_key") apiKey: String,
+        @Query("format") format: String
+    ): TopArtistsResponse
 
 }
