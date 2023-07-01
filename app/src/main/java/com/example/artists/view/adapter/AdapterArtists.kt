@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.artists.R
-import com.example.artists.databinding.CardsDetailsArtistBinding
+import com.example.artists.databinding.CardsTopArtistBinding
 import com.example.artists.model.dataclass.artist.ArtistData
 
 class AdapterArtists(private val listArtists: List<ArtistData>) :
     RecyclerView.Adapter<AdapterArtists.ViewHolder>() {
 
-    private lateinit var binding: CardsDetailsArtistBinding
+    private lateinit var binding: CardsTopArtistBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = CardsDetailsArtistBinding.bind(
-            LayoutInflater.from(parent.context).inflate(R.layout.cards_details_artist, parent, false)
+        binding = CardsTopArtistBinding.bind(
+            LayoutInflater.from(parent.context).inflate(R.layout.cards_top_artist, parent, false)
         )
         return ViewHolder(binding)
     }
@@ -27,7 +27,8 @@ class AdapterArtists(private val listArtists: List<ArtistData>) :
         return listArtists.size
     }
 
-    class ViewHolder(private val binding: CardsDetailsArtistBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: CardsTopArtistBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(artistData: ArtistData) {
             binding.textArtists.text = artistData.name

@@ -19,8 +19,7 @@ class ArtistsViewModel : ViewModel() {
     fun getDataArtist() {
         viewModelScope.launch {
             val result = artistsRepository.getArtistData()
-            if (result != null)
-                _artistModel.postValue(result.topartists)
+            _artistModel.postValue(result.topartists)
         }
     }
 
