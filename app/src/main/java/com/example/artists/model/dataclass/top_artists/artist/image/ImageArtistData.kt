@@ -1,4 +1,4 @@
-package com.example.artists.model.dataclass.artist.image
+package com.example.artists.model.dataclass.top_artists.artist.image
 
 import com.google.gson.annotations.SerializedName
 

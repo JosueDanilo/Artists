@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.artists.R
 import com.example.artists.databinding.CardsTopArtistBinding
-import com.example.artists.model.dataclass.top_artists.artist.ArtistData
-import com.example.artists.view.callback.OnClick
+import com.example.artists.model.dataclass.top_tracks.tracks.info_tracks.TrackInfoArtists
 
-class AdapterArtists(private val listArtists: MutableList<ArtistData>, private val listener: OnClick) :
-    RecyclerView.Adapter<AdapterArtists.ViewHolder>() {
+class AdapterSong(private val listSong: List<TrackInfoArtists>): RecyclerView.Adapter<AdapterSong.ViewHolder>() {
 
     private lateinit var binding: CardsTopArtistBinding
 
@@ -17,26 +15,22 @@ class AdapterArtists(private val listArtists: MutableList<ArtistData>, private v
         binding = CardsTopArtistBinding.bind(
             LayoutInflater.from(parent.context).inflate(R.layout.cards_top_artist, parent, false)
         )
-        return ViewHolder(binding, listener)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listArtists[position])
+        holder.bind(listSong[position])
     }
 
     override fun getItemCount(): Int {
-        return listArtists.size
+        return listSong.size
     }
 
-    class ViewHolder(private val binding: CardsTopArtistBinding, private val listener: OnClick) :
+    class ViewHolder(private val binding: CardsTopArtistBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(artistData: ArtistData) {
+        fun bind(artistData: TrackInfoArtists) {
             binding.textArtists.text = artistData.name
-
-            binding.cardArtist.setOnClickListener {
-                listener.onClick(artistData.name)
-            }
         }
 
     }

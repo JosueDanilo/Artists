@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".view.TopArtistsFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -46,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_card_top"
-        tools:listitem="@layout/cards_top_artist"
-        app:spanCount="@integer/material_motion_duration_long_2"/>
+        app:spanCount="2"
+        tools:listitem="@layout/cards_top_artist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

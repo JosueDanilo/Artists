@@ -1,6 +1,6 @@
-package com.example.artists.model.dataclass.artist
+package com.example.artists.model.dataclass.top_artists.artist
 
-import com.example.artists.model.dataclass.artist.image.ImageArtistData
+import com.example.artists.model.dataclass.top_artists.artist.image.ImageArtistData
 
 data class ArtistData(
     val name: String,
