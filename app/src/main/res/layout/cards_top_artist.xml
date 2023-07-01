@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:gravity="center">
 
@@ -27,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/belanosima_semibold"
-                android:text="Hola Mundo"
+                tools:text="Hola Mundo"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="26sp"

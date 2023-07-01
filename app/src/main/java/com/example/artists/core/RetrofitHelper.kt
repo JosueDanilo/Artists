@@ -7,12 +7,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
 
-    // Crea el interceptor de logging
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY // Nivel de log (BODY muestra la URL final)
+        level = HttpLoggingInterceptor.Level.BODY
     }
 
-    // Crea el cliente HTTP con el interceptor
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()

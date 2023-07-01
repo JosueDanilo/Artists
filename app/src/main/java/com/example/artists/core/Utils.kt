@@ -1,5 +1,8 @@
 package com.example.artists.core
 
+import android.content.Context
+import android.widget.Toast
+
 class Utils {
 
     companion object {
@@ -12,6 +15,10 @@ class Utils {
         const val COUNTRY = "colombia"
         const val LIMIT_ARTIST_TOP = 10
         const val LIMIT_TRACKS_TOP = 5
+
+        fun Context.showMessage(message: String, duration: Int = Toast.LENGTH_SHORT) {
+            Toast.makeText(this, message, duration).show()
+        }
 
     }
 

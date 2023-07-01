@@ -16,24 +16,51 @@ class ArtistsViewModel : ViewModel() {
     val artistsDataModel: LiveData<TopArtistsData> get() = _artistModel
 
     // obtener las canciones mas populares por artista
-    private val _tracksModel = MutableLiveData<TopTracksResponse>()
-    val tracksDataModel: LiveData<TopTracksResponse> get() = _tracksModel
+    val tracksModel = MutableLiveData<TopTracksResponse?>()
 
-    var nameArtist: String = ""
+    // Notifica progressBar
+    private val _loadingModel = MutableLiveData<Boolean>()
+    val loadingModel: LiveData<Boolean> get() = _loadingModel
+
+    // Notifica errores
+    private val _errorModel = MutableLiveData<String>()
+    val errorModel: LiveData<String> get() = _errorModel
 
     private val artistsRepository = ArtistRepository()
 
+    /**
+     *
+     * Metodo encargado realizar la busqueda de los artistas mas populares de colombia.
+     *
+     */
     fun getDataArtist() {
+        _loadingModel.postValue(true)
         viewModelScope.launch {
-            val result = artistsRepository.getArtistData()
-            _artistModel.postValue(result.topartists)
+            try {
+                val result = artistsRepository.getArtistData()
+                _artistModel.postValue(result.topartists)
+            } catch (e: Exception) {
+                _errorModel.postValue("Error al obtener los Artistas")
+            }
+            _loadingModel.postValue(false)
         }
     }
 
-    fun getDataPopularArtist() {
+    /**
+     *
+     * Metodo encargado realizar la busqueda de las canciones mas populares de los artistas.
+     * @param nameArtist Nombre del artista
+     */
+    fun getDataPopularArtist(nameArtist: String) {
+        _loadingModel.postValue(true)
         viewModelScope.launch {
-            val result = artistsRepository.getTracksData(nameArtist)
-            _tracksModel.postValue(result)
+            try {
+                val result = artistsRepository.getTracksData(nameArtist)
+                tracksModel.postValue(result)
+            } catch (e: Exception) {
+                _errorModel.postValue("Error al obtener las canciones populares")
+            }
+            _loadingModel.postValue(false)
         }
     }
 
