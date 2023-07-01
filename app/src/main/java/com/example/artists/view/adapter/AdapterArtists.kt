@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.artists.R
 import com.example.artists.databinding.CardsTopArtistBinding
-import com.example.artists.model.dataclass.artist.ArtistData
+import com.example.artists.model.dataclass.top_artists.artist.ArtistData
+import com.example.artists.view.callback.OnClick
 
-class AdapterArtists(private val listArtists: List<ArtistData>) :
+class AdapterArtists(private val listArtists: List<ArtistData>, private val listener: OnClick) :
     RecyclerView.Adapter<AdapterArtists.ViewHolder>() {
 
     private lateinit var binding: CardsTopArtistBinding
@@ -16,7 +17,7 @@ class AdapterArtists(private val listArtists: List<ArtistData>) :
         binding = CardsTopArtistBinding.bind(
             LayoutInflater.from(parent.context).inflate(R.layout.cards_top_artist, parent, false)
         )
-        return ViewHolder(binding)
+        return ViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,11 +28,15 @@ class AdapterArtists(private val listArtists: List<ArtistData>) :
         return listArtists.size
     }
 
-    class ViewHolder(private val binding: CardsTopArtistBinding) :
+    class ViewHolder(private val binding: CardsTopArtistBinding, private val listener: OnClick) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(artistData: ArtistData) {
             binding.textArtists.text = artistData.name
+
+            binding.cardArtist.setOnClickListener {
+                listener.onClick(artistData.name)
+            }
         }
 
     }

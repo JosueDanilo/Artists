@@ -2,18 +2,16 @@ package com.example.artists.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.artists.R
 import com.example.artists.databinding.FragmentTopArtistsBinding
-import com.example.artists.model.dataclass.artist.ArtistData
+import com.example.artists.model.dataclass.top_artists.artist.ArtistData
 import com.example.artists.view.adapter.AdapterArtists
+import com.example.artists.view.callback.OnClick
 import com.example.artists.viewmodel.ArtistsViewModel
 
 /**
@@ -21,12 +19,12 @@ import com.example.artists.viewmodel.ArtistsViewModel
  * Use the [TopArtistsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TopArtistsFragment : Fragment(R.layout.fragment_top_artists) {
+class TopArtistsFragment : Fragment(R.layout.fragment_top_artists), OnClick {
 
     private lateinit var binding: FragmentTopArtistsBinding
 
-    private val artistsViewModel: ArtistsViewModel by viewModels()
-    private var listArtists: MutableList<ArtistData> = mutableListOf()
+    private val artistsViewModel: ArtistsViewModel by activityViewModels()
+    private val listArtists: MutableList<ArtistData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +38,20 @@ class TopArtistsFragment : Fragment(R.layout.fragment_top_artists) {
         artistsViewModel.getDataArtist()
 
         artistsViewModel.artistsDataModel.observe(viewLifecycleOwner) {
-            listArtists = it.artist as MutableList<ArtistData>
-            binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-            binding.recycler.adapter = AdapterArtists(listArtists)
+            listArtists.clear()
+            listArtists.addAll(it.artist)
+            binding.recycler.layoutManager =
+                GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+            binding.recycler.adapter = AdapterArtists(listArtists, this)
         }
-
-        showListArtist()
 
     }
 
-    private fun showListArtist() {
-
+    override fun onClick(nameArtist: String) {
+        artistsViewModel.nameArtist = nameArtist
+        val action =
+            TopArtistsFragmentDirections.actionTopArtistsFragmentToArtistDetailsFragment(nameArtist)
+        findNavController().navigate(action)
     }
 
 }
